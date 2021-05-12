@@ -1,50 +1,4 @@
 /*
-fetch("./data.json")
-  .then((response) => response.json())
-  .then(createUserCards)
-  .catch((error) => {
-    console.log(error);
-  });
-
-function createUserCards(data) {
-  console.table(data);
-  console.log(1);
-}*/
-
-/*function executor(resolve, reject) {
-  resolve();
-}
-const myFirstPromise = new Promise(executor);
-
-function delay(ms) {
-  return new Promise((resolve, reject) => {
-    setTimeout(resolve, ms);
-  });
-}
-
-delay(5000).then(() => {
-  console.log("success");
-});*/
-
-/*let isFetching = true;
-function promiseCb(resolve, reject) {
-  //reject('test');
-  setTimeout(()=>resolve("success"), 3000);
-}
-const mySecondPromise = new Promise(promiseCb);
-console.log(mySecondPromise);
-
-mySecondPromise
-  .then((value) => {
-    console.log(`Resolve: ${value}`);
-  })
-  .catch((error) => {
-    console.log(`Catch: ${error}`);
-  })
-  .finally(() => (isFetching = false));
-
-*/
-// [0,1)
 const shchrodingerPromise = new Promise((resolve, reject) => {
   const catDestiny = Math.random();
   if (catDestiny >= 0.5) {
@@ -60,3 +14,27 @@ console.log(1);
 function checkCat(str) {
   console.log(`STATUS: ${str}`);
 }
+*/
+
+function loadImage(src) {
+  //const img = new Image();
+  const img = document.createElement("img");
+  img.src = src;
+
+  return new Promise((resolve, reject) => {
+    img.addEventListener("load", () => {
+      resolve(img);
+    });
+    img.addEventListener("error", () => {
+      reject(new Error("Image has not been delivered"));
+    });
+  });
+}
+
+loadImage("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png")
+.then((img) => {
+  document.body.append(img);
+})
+.catch((error)=>{
+  alert(error)
+})
