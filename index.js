@@ -27,8 +27,12 @@ function foo(){
 
 fetch("./data.json")
   .then((response) => response.json())
-  .then(createUserCards);
+  .then(createUserCards)
+  .catch((error) => {
+    console.log(error);
+  });
 
 function createUserCards(data) {
-  console.log(data);
+  console.table(data);
+  console.log(1);
 }
