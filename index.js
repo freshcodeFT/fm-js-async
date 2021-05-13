@@ -1,19 +1,26 @@
-async function getDataFromJson(path) {
-  const response = await fetch(path);
-  return await response.json();
-}
+'use strict';
 
-async function asyncWriteData(path) {
-  try {
-    const data = await getDataFromJson(path);
-    document.body.append(JSON.stringify(data));
-  } catch (e) {
-    console.dir(e);
-  }
-}
+console.log("start"); // 1
 
-function syncWriteData(path) {
-  getDataFromJson(path)
-    .then((data) => document.body.append(JSON.stringify(data)))
-    .catch((e) => console.dir(e));
-}
+setTimeout(()=>{
+  console.log("timer"); // 7
+}, 0);
+
+const p1 = new Promise((resolve, reject) => {
+  console.log("promise creation"); // 2
+
+  resolve();
+  reject();
+
+  console.log("end of promise creation") // 3;
+});
+
+p1.then(()=>{
+  console.log("promise resolve body"); // 5
+}).catch(()=>{ 
+  console.log("catch body"); // 5
+}).finally(()=>{
+  console.log("finally body") // 6
+})
+
+console.log("end"); // 4
