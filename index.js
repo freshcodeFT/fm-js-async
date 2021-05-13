@@ -1,26 +1,27 @@
-'use strict';
-
-console.log("start"); // 1
-
-setTimeout(()=>{
-  console.log("timer"); // 7
-}, 0);
+"use strict";
 
 const p1 = new Promise((resolve, reject) => {
-  console.log("promise creation"); // 2
-
-  resolve();
-  reject();
-
-  console.log("end of promise creation") // 3;
+  resolve(42);
 });
 
-p1.then(()=>{
-  console.log("promise resolve body"); // 5
-}).catch(()=>{ 
-  console.log("catch body"); // 5
-}).finally(()=>{
-  console.log("finally body") // 6
-})
+const p2 = Promise.resolve("Short resolve");
+const p3 = Promise.reject("Short reject");
+const p4 = Promise.resolve({username: "test"});
+const p5 = Promise.reject({errorType: "auth"});
 
-console.log("end"); // 4
+function handlePromise(promise) {
+  return promise
+    .then((data) => {
+      console.log("Data is: ", data);
+    })
+    .catch((err) => {
+      console.dir(err);
+    });
+}
+
+
+handlePromise(p1);
+handlePromise(p2);
+handlePromise(p3);
+handlePromise(p4);
+handlePromise(p5);
