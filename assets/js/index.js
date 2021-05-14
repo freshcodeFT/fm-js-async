@@ -1,23 +1,19 @@
 "use strict";
 
-const listContainer = document.querySelector(".listContainer");
-listContainer.addEventListener("click", mainListHandler);
+const textContainer = document.querySelector(".textContainer");
 
-
-const list = document.querySelectorAll(".listContainer > li");
-
-function mainListHandler({ target }) {
-  const li = target.closest("li");
-  if(li){
-    li.innerHTML += "!";
+document.addEventListener("mouseover", ({ target }) => {
+  const liElem = target.closest("li");
+  if (liElem) {
+    textContainer.innerText = liElem.innerText;
+    return;
   }
-}
+  textContainer.innerText = target.tagName;
+});
 
-const addButton = document.querySelector(".addButton");
-addButton.addEventListener("click", addBtnClickHandler);
-
-function addBtnClickHandler() {
-  const li = document.createElement("li");
-  li.innerText = "Added Item";
-  listContainer.append(li);
-}
+/**
+ * Задание
+ *
+ * При наведении (mouseover) на элементы списка выводить в текстовом поле текст этих элементов
+ * При наведении на любой другой элемент выводить название тега этого элемента (element.tagName).
+ */
